@@ -1,0 +1,70 @@
+﻿@page
+@model EditorMarkdown.Pages.GridsModel
+@{
+    ViewData["Title"] = "MarkdownItems";
+    ViewData["RenderSidebar"] = true;
+}
+
+<div class="header-mk">
+    <h4>Grids</h4>
+    <span>lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem</span>
+</div>
+<div class="markdown_container">
+    <div style="padding-bottom:16px;">
+        <h4>Biblioteca Grids Design Sistem</h4>
+        <span>Crie e edite conteúdo</span>
+    </div>
+    <div id="markdownEditorContainer" style="display: none;">
+        <textarea id="markdownInput"></textarea>
+    </div>
+
+    <div id="markdownPreviewContainer">
+        <div id="markdownPreview"></div>
+    </div>
+
+    <button id="editButton">Editar</button>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="~/css/simplemde.min.css" />
+    <script src="~/js/simplemde.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@12.2.0/dist/markdown-it.min.js"></script>
+
+    <script>
+        var markdownPreview = document.getElementById("markdownPreview");
+        var markdownInput = document.getElementById("markdownInput");
+        var editButton = document.getElementById("editButton");
+        var simplemde; // Variável para armazenar a instância do SimpleMDE
+
+        editButton.addEventListener("click", function () {
+            if (!simplemde) {
+                simplemde = new SimpleMDE({ element: markdownInput });
+            }
+
+            if (markdownEditorContainer.style.display === "none") {
+                markdownEditorContainer.style.display = "block";
+                markdownInput.style.display = "none";
+                markdownPreview.style.display = "none";
+            } else {
+                markdownEditorContainer.style.display = "none";
+                markdownInput.style.display = "none";
+                markdownPreview.style.display = "block";
+                updatePreview(); // Atualiza a pré-visualização ao voltar para o modo de visualização
+            }
+        });
+
+        // Function to update the preview when user types in the textarea
+        function updatePreview() {
+            if (simplemde) {
+                var markdownValue = simplemde.value();
+                var markdownHTML = window.markdownit().render(markdownValue);
+                markdownPreview.innerHTML = markdownHTML;
+            }
+        }
+
+        markdownInput.addEventListener("input", updatePreview);
+
+        // Initial preview update
+        updatePreview();
+    </script>
+}

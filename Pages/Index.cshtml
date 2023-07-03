@@ -1,91 +1,19 @@
 ﻿@page
 @model IndexModel
+
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Página Inicial";
 }
 
 
-<div>
-    @*<div id="markdownPreviewContainer">
-        <div id="markdownPreview"></div>
+    <div class="timeline">
+    <div class="point highlighted" id="point1"></div>
+        <div class="point" id="point2"></div>
+        <div class="point" id="point3"></div>
     </div>
 
-    <div id="markdownEditorContainer" style="display: none;">
-        <textarea id="markdownInput" rows="10" cols="80"></textarea>
+    <div class="sections">
+        <section class="section" id="section1">Design Systems</section>
+        <section class="section" id="section2">Seção 2</section>
+        <section class="section" id="section3">Seção 3</section>
     </div>
-
-    <button id="editButton">Editar</button>*@
-
-
-    <div>
-        <div id="markdownEditorContainer" style="display: none;">
-            <textarea id="markdownInput"></textarea>
-        </div>
-
-        <div id="markdownPreviewContainer"></div>
-    </div>
-    <div>
-        <button id="toggleEditModeButton">Editar</button>
-    </div>
-</div>
-
-@section Scripts {
-    @*<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>*@
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-    <script>
-        //var markdownPreview = document.getElementById("markdownPreview");
-        //var markdownInput = document.getElementById("markdownInput");
-        //var editButton = document.getElementById("editButton");
-
-        //editButton.addEventListener("click", function () {
-        //    if (markdownPreview.style.display === "none") {
-        //        markdownPreview.style.display = "block";
-        //        markdownEditorContainer.style.display = "none";
-        //    } else {
-        //        markdownPreview.style.display = "none";
-        //        markdownEditorContainer.style.display = "block";
-        //    }
-        //});
-
-        //// Function to update the preview when user types in the textarea
-        //function updatePreview() {
-        //    var markdownValue = markdownInput.value;
-        //    var markdownHTML = window.markdownit().render(markdownValue);
-        //    markdownPreview.innerHTML = markdownHTML;
-        //}
-
-        //markdownInput.addEventListener("input", updatePreview);
-
-        //// Initial preview update
-        //updatePreview();
-
-                // SIMPLE LIB MDE
-
-
-        var markdownInput = document.getElementById("markdownInput");
-        var markdownEditorContainer = document.getElementById("markdownEditorContainer");
-        var markdownPreviewContainer = document.getElementById("markdownPreviewContainer");
-        var toggleEditModeButton = document.getElementById("toggleEditModeButton");
-        var simplemde;
-
-        toggleEditModeButton.addEventListener("click", function () {
-            if (!simplemde) {
-                markdownEditorContainer.style.display = "block";
-                simplemde = new SimpleMDE({ element: markdownInput });
-            }
-
-            if (markdownEditorContainer.style.display === "none") {
-                markdownEditorContainer.style.display = "block";
-                markdownPreviewContainer.style.display = "none";
-                toggleEditModeButton.textContent = "Visualizar";
-            } else {
-                markdownEditorContainer.style.display = "none";
-                markdownPreviewContainer.style.display = "block";
-                toggleEditModeButton.textContent = "Editar";
-
-                // Update the preview when switching to the view mode
-                markdownPreviewContainer.innerHTML = window.markdownit().render(simplemde.value());
-            }
-        });
-    </script>
-}

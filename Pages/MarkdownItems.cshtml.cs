@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EditorMarkdown.Pages
 {
-    public class PrivacyModel : PageModel
+    public class MarkdownItemsModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
+        private readonly ILogger<MarkdownItemsModel> _logger;
 
-        public PrivacyModel(ILogger<PrivacyModel> logger)
+        public MarkdownItemsModel(ILogger<MarkdownItemsModel> logger)
         {
             _logger = logger;
         }
