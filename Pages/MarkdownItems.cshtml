@@ -14,13 +14,20 @@
             <h4>Biblioteca Design Sistem</h4>
             <span>Crie e edite conteúdo</span>
         </div>
-        <div id="markdownEditorContainer" style="display: none;">
-            <textarea id="markdownInput"></textarea>
-        </div>
 
-        <div id="markdownPreviewContainer">
-            <div id="markdownPreview"></div>
-        </div>
+        <form method="post">
+            <div id="markdownEditorContainer" style="display: none;">
+            <textarea id="markdownInput" name="ConteudoMkd">@Model.CadastroMkd.ConteudoMkd</textarea>
+            </div>
+
+            <div id="markdownPreviewContainer">
+            <div id="markdownPreview">@Model.CadastroMkd.ConteudoMkd</div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" />
+            </div>
+        </form>
 
         <button id="editButton">Editar</button>
 </div>
