@@ -108,7 +108,7 @@ body {
 
 .sidebar {
     width: 15%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #000;
     color: #fff;
     padding: 20px;
@@ -144,14 +144,161 @@ body {
 
 .header-mk {
     width: 100%;
-    height: 132px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: #c7c5c5;
-    padding: 32px;
+    padding: 24px 48px;
 }
 
 h4 {
     color: #159520;
+    margin: 0px;
+    font-weight: 600;
 }
+
+
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #ffffff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.botoes-mkd {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-mkd {
+    width: 148px;
+    height: 32px;
+    background-color: grey;
+    color: white;
+    border-radius: 4px;
+    padding: 4px;
+    text-align: center;
+    border: 0;
+    cursor:pointer;
+}
+    .btn-mkd:hover {
+        background-color: #6a6a6a;
+    }
+
+.btn-salvar-mkd {
+    width: 148px;
+    height: 32px;
+    background-color: #159520;
+    color: white;
+    border-radius: 4px;
+    padding: 4px;
+    text-align: center;
+    border: 0;
+    cursor: pointer;
+}
+
+    .btn-salvar-mkd:hover {
+        background-color: #13871d;
+    }
+
+.div1 {
+    border-right: 1px solid black; 
+    width:50%;
+}
+
+.div2 {
+    border-left: 1px solid black;
+    width: 50%;
+}
+
+form {
+    padding: 16px;
+}
+
+
+
+.section-1 {
+    width: 100%;
+    padding: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+}
+
+.card-1 {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 24px 32px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-self: stretch;
+    flex: 1;
+    position: relative;
+    box-shadow: var( --cards-escala-box-shadow, 0px 2px 16px 0px rgba(0, 0, 0, 0.1) );
+    cursor:pointer
+}
+    .card-1:hover {
+        box-shadow: 0 0 16px 8px #008000;
+    }
+
+
+.frame {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    justify-content: center;
+
+}
+
+.nos{
+    color: var(--cinza-05, #4b4b4b);
+    text-align: left;
+    font: 400 20px "Inter", sans-serif;
+ 
+}
+
