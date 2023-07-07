@@ -5,31 +5,54 @@
     ViewData["RenderSidebar"] = true;
 }
 
+<div id="loadingOverlay">
+    <div class="loading-spinner"></div>
+</div>
+
 <div class="header-mk">
-    <h4>Titulo</h4>
-    <span>lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem</span>
+    <h4>Biblioteca </h4>
 </div>
 <div class="markdown_container">
-        <div style="padding-bottom:16px;">
-            <h4>Biblioteca Design Sistem</h4>
-            <span>Crie e edite conteúdo</span>
+
+    <div style="display:flex;">
+        <div class="div1">
+            <form method="post">
+                <div id="markdownEditorContainer" style="display: none;">
+                    <textarea id="markdownInput" name="ConteudoMkd">@Model.CadastroMkd.ConteudoMkd</textarea>
+                </div>
+
+                <div id="markdownPreviewContainer">
+                    <div id="markdownPreview">@Model.CadastroMkd.ConteudoMkd</div>
+                </div>
+
+                <div class="botoes-mkd">
+                    <button class="btn-salvar-mkd" id="salvarButton" type="submit" asp-page-handler="MKD1" style="display: none;">Salvar</button>
+                    <span class="btn-mkd" id="editButton" onclick="editar('01')">Editar</span>
+                    <span class="btn-mkd" id="voltarButton" style="display: none;">voltar</span>
+                </div>
+            </form>
         </div>
+        <div class="div2">
+            <form method="post">
+                <div id="markdownEditorContainer2" style="display: none;">
+                    <textarea id="markdownInput2" name="ConteudoMkd">@Model.CadastroMkd2.ConteudoMkd</textarea>
+                </div>
 
-        <form method="post">
-            <div id="markdownEditorContainer" style="display: none;">
-            <textarea id="markdownInput" name="ConteudoMkd">@Model.CadastroMkd.ConteudoMkd</textarea>
-            </div>
+                <div id="markdownPreviewContainer">
+                    <div id="markdownPreview2">@Model.CadastroMkd2.ConteudoMkd</div>
+                </div>
 
-            <div id="markdownPreviewContainer">
-            <div id="markdownPreview">@Model.CadastroMkd.ConteudoMkd</div>
-            </div>
+                <div class="botoes-mkd">
+                    <button class="btn-salvar-mkd" id="salvarButton2" type="submit" asp-page-handler="MKD2" style="display: none;">Salvar</button>
+                    <span class="btn-mkd" id="editButton2" onclick="editar('02')">Editar</span>
+                    <span class="btn-mkd" id="voltarButton2" style="display: none;">voltar</span>
+                </div>
+            </form>
+        </div>
+    </div>
 
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" />
-            </div>
-        </form>
 
-        <button id="editButton">Editar</button>
+
 </div>
 
 @section Scripts {
@@ -38,34 +61,93 @@
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@12.2.0/dist/markdown-it.min.js"></script>
 
     <script>
+        //SimpleMDE 01
         var markdownPreview = document.getElementById("markdownPreview");
         var markdownInput = document.getElementById("markdownInput");
-        var editButton = document.getElementById("editButton");
+        var editButton2 = document.getElementById("editButton2");
+        var voltarButton = document.getElementById("voltarButton");
+        var salvarButton = document.getElementById("salvarButton");
         var simplemde; // Variável para armazenar a instância do SimpleMDE
 
-        editButton.addEventListener("click", function () {
-            if (!simplemde) {
-                simplemde = new SimpleMDE({ element: markdownInput });
-            }
+        //SimpleMDE 01
+        var markdownPreview2 = document.getElementById("markdownPreview2");
+        var markdownInput2 = document.getElementById("markdownInput2");
+        var editButton = document.getElementById("editButton");
+        var voltarButton2 = document.getElementById("voltarButton2");
+        var salvarButton2 = document.getElementById("salvarButton2");
+        var simplemde2; // Variável para armazenar a instância do SimpleMDE
 
-            if (markdownEditorContainer.style.display === "none") {
-                markdownEditorContainer.style.display = "block";
-                markdownInput.style.display = "none";
-                markdownPreview.style.display = "none";
-            } else {
-                markdownEditorContainer.style.display = "none";
-                markdownInput.style.display = "none";
-                markdownPreview.style.display = "block";
-                updatePreview(); // Atualiza a pré-visualização ao voltar para o modo de visualização
-            }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Inicializar o SimpleMDE apenas uma vez
+            simplemde = new SimpleMDE({ element: markdownInput });
+            simplemde2 = new SimpleMDE({ element: markdownInput2 });
+            updatePreview();
+            // Esconder o loading quando a página terminar de carregar
+            setTimeout(function () {
+                document.getElementById("loadingOverlay").style.display = "none";
+                simplemde.value(markdownInput.value);
+                simplemde2.value(markdownInput2.value);
+            }, 300)
+
         });
 
-        // Function to update the preview when user types in the textarea
+        function editar(id) {
+            // Faça algo com base no ID do botão clicado
+            
+            // Outras ações específicas para cada botão podem ser executadas aqui
+
+            if (id == '01') {
+
+                markdownEditorContainer.style.display = "block";
+                markdownInput.style.display = "none";
+                salvarButton.style.display = "block";
+                voltarButton.style.display = "block";
+                editButton.style.display = "none";
+                markdownPreview.style.display = "none";
+
+                // Definir o valor do editor com o conteúdo do campo de texto
+                simplemde.value(markdownInput.value);
+            }
+
+            if (id == '02') {
+
+                markdownEditorContainer2.style.display = "block";
+                markdownInput2.style.display = "none";
+                salvarButton2.style.display = "block";
+                voltarButton2.style.display = "block";
+                editButton2.style.display = "none";
+                markdownPreview2.style.display = "none";
+
+                // Definir o valor do editor com o conteúdo do campo de texto
+                simplemde2.value(markdownInput2.value);
+            }
+
+        }
+
+        voltarButton.addEventListener("click", function () {
+
+            markdownEditorContainer.style.display = "none";
+            markdownInput.style.display = "none";
+            salvarButton.style.display = "block";
+            markdownPreview.style.display = "block";
+            salvarButton.style.display = "none";
+            voltarButton.style.display = "none";
+            editButton.style.display = "block";
+            updatePreview(); // Atualiza a pré-visualização ao voltar para o modo de visualização
+
+        });
+
         function updatePreview() {
             if (simplemde) {
                 var markdownValue = simplemde.value();
                 var markdownHTML = window.markdownit().render(markdownValue);
                 markdownPreview.innerHTML = markdownHTML;
+            }
+            if (simplemde2) {
+                var markdownValue2 = simplemde2.value();
+                var markdownHTML2 = window.markdownit().render(markdownValue2);
+                markdownPreview2.innerHTML = markdownHTML2;
             }
         }
 
@@ -74,4 +156,6 @@
         // Initial preview update
         updatePreview();
     </script>
+
 }
+
